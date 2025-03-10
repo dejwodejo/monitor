@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Projects</title>
+
+    <link rel="icon" href="https://mikr.us/assets/terminal.png" type="image/png" />
+    <link rel="stylesheet" href="styles/projects.css" />
+</head>
+
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-line">
+                <span class="prompt">$</span> list --projects
+            </div>
+            <p class="response">Loading projects...</p>
+        </div>
+
+        <div id="projects-grid" class="projects-grid">
+            <!-- Projects will be generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script src="scripts/projects.js"></script>
+</body>
+
+</html>

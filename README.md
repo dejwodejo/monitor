@@ -1,0 +1,1 @@
+svgs: https://www.svgrepo.com/collection/internet-duotone-line-icons/
