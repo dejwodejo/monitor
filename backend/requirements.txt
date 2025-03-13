@@ -1,8 +1,9 @@
-fastapi
-uvicorn
-sqlalchemy
-passlib
-bcrypt
-python-jose
-python-multipart
-python-dotenv
+fastapi[standard] == 0.115.11
+pydantic == 2.10.6
+uvicorn == 0.34.0
+sqlalchemy == 2.0.39
+passlib == 1.7.4
+bcrypt == 4.0.0
+python-jose == 3.4.0
+python-multipart == 0.0.20
+python-dotenv == 1.0.1
