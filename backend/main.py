@@ -38,13 +38,6 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-# For testing - a protected route that requires authentication
-@app.get("/users/me", response_model=dict)
-async def read_users_me(current_user: User = Depends(get_current_user)):
-    return {"email": current_user.email, "id": current_user.id}
-
-
-# Create user endpoint (for initial setup)
 @app.post("/users/")
 def create_user(user: UserLogin, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.email == user.email).first()
