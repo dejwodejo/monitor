@@ -1,12 +1,16 @@
 services:
   backend:
+    container_name: fastapi_backend
     build: ./backend
     restart: always
+    ports:
+      - "8000:8000"
     volumes:
       - ./backend:/app
       - ./database:/app/database
 
   frontend:
+    container_name: nginx_front
     build: ./frontend
     restart: always
     ports:

@@ -1,4 +1,3 @@
-// Main login function
 document.getElementById('login-button').addEventListener('click', async function (e) {
     e.preventDefault();
 
@@ -15,7 +14,6 @@ document.getElementById('login-button').addEventListener('click', async function
         return;
     }
 
-    // Basic email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         displayError("Please enter a valid email address");
@@ -33,11 +31,11 @@ document.getElementById('login-button').addEventListener('click', async function
         sessionStorage.setItem('loginAttempts', loginAttempts.toString());
 
         // Simple rate limiting (3 attempts within short period)
-        if (loginAttempts > 1000) {
+        if (loginAttempts > 3) {
             const lastAttempt = parseInt(sessionStorage.getItem('lastLoginAttempt') || '0');
             const now = Date.now();
 
-            if (now - lastAttempt < 60000) { // 1 minute cooldown
+            if (now - lastAttempt < 4) { // 1 minute cooldown
                 throw new Error("Too many login attempts. Please try again later.");
             } else {
                 // Reset counter after cooldown
@@ -47,7 +45,7 @@ document.getElementById('login-button').addEventListener('click', async function
 
         sessionStorage.setItem('lastLoginAttempt', Date.now().toString());
 
-        const response = await fetch("http://localhost:8000/login", {
+        const response = await fetch("/api/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -145,3 +143,13 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'projects.html';
     }
 });
+
+/**
+ * Basic input checks of login data.
+ * @param {string} email
+ * @param {string} password
+ * @returns {boolean} True if both of inputs pass basic client side validation
+ */
+function loginInputsValidation(email, password) {
+
+}
