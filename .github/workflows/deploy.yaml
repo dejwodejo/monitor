@@ -34,8 +34,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Debug DNS
-      run: nslookup ${{ secrets.VPS_HOST }}
+    - name: Test basic connectivity
+      run: timeout 5 nc -zv ${{secrets.VPS_HOST}} ${{secrets.VPS_PORT}}
     - name: install ssh keys
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
