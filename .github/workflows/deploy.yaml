@@ -34,8 +34,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Test basic connectivity
-      run: timeout 5 nc -zv ${{secrets.VPS_HOST}} ${{secrets.VPS_PORT}}
+    - name: Test simple SSH
+      run: ssh ${{secrets.VPS_USERNAME}}@${{secrets.VPS_HOST}} -p ${{secrets.VPS_PORT}} "echo 'Connection successful'"
     - name: install ssh keys
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
@@ -43,3 +43,5 @@ jobs:
         ssh-keyscan -p ${{secrets.VPS_PORT}} -H ${{secrets.VPS_USERNAME}}@${{secrets.VPS_HOST}} > ~/.ssh/known_hosts
     - name: connect and pull
       run: ssh ${{secrets.VPS_USERNAME}}@${{secrets.VPS_HOST}} -p ${{secrets.VPS_PORT}} "cd ${{ secrets.VPS_PROJECT_PATH }} && docker compose pull && docker compose up -d && exit"
+    - name: cleanup
+      run: rm -rf ~/.ssh
