@@ -42,7 +42,8 @@ const projects = [
     id: "cube",
     title: "Virtual walk at UZ",
     logo: "/images/cube.svg",
-    statius: "running",
+    logoStyle: "width: 40px;",
+    status: "running",
     description: "my engineering thesis app",
     links: [
       { url: "#", text: "https://github.com/dejwodejo/cube" },
