@@ -41,7 +41,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.VPS_HOST_KEY }}" > ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
-    - name: connect and pull
+    - name: connect and pull with debugging
       run: |
         ssh ${{secrets.VPS_USERNAME}}@${{secrets.VPS_HOST}} -p ${{secrets.VPS_PORT}} "cd ${{ secrets.VPS_PROJECT_PATH }} && \
         git pull origin main && \
@@ -49,6 +49,10 @@ jobs:
         docker compose pull && \
         docker compose down && \
         docker compose up -d --force-recreate --no-deps && \
+        echo '--- CONTAINER STATUS ---' && \
+        docker compose ps && \
+        echo '--- CONTAINER LOGS ---' && \
+        docker compose logs && \
         exit"
     - name: cleanup
       run: rm -rf ~/.ssh
