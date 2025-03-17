@@ -6,7 +6,6 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
       - ./database:/app/database
 
   frontend:
