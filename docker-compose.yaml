@@ -1,16 +1,16 @@
 services:
   backend:
     container_name: fastapi_backend
-    image: ghcr.io/dejwodejo/monitor_backend:latest
+    build: ./backend
     restart: always
     ports:
       - "8000:8000"
     volumes:
-      - ./database:/app/database
+      - ./database:/app/database # Only keep database volume
 
   frontend:
     container_name: nginx_front
-    image: ghcr.io/dejwodejo/monitor_frontend:latest
+    build: ./frontend
     restart: always
     ports:
       - "80:80"

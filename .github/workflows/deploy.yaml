@@ -1,35 +1,11 @@
-name: update app via ghcr
+name: deploy new stuff
 
 on:
   push:
     branches: ["main"]
 
-env:
-  REGISTRY: ghcr.io
-  BACKEND_IMAGE: ${{github.actor}}/monitor_backend:latest
-  FRONTEND_IMAGE: ${{github.actor}}/monitor_frontend:latest
-
 jobs:
-  publish:
-    name: publish image
-    runs-on: ubuntu-22.04
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: login
-      run: |
-        echo ${{secrets.PAT}} | docker login ghcr.io -u ${{github.actor}} --password-stdin
-    - name: build and publish backend
-      run: |
-        docker build ./backend --tag ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}
-        docker push ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}
-    - name: build and publish frontend
-      run: |
-        docker build ./frontend --tag ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}
-        docker push ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}
-
   deploy:
-    needs: publish
     name: deploy images
     runs-on: ubuntu-22.04
 
@@ -41,14 +17,13 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.VPS_HOST_KEY }}" > ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
-    - name: connect and pull with debugging
+    - name: fetch code and build container
       run: |
         ssh ${{secrets.VPS_USERNAME}}@${{secrets.VPS_HOST}} -p ${{secrets.VPS_PORT}} "cd ${{ secrets.VPS_PROJECT_PATH }} && \
         git pull origin main && \
-        echo '${{secrets.PAT}}' | docker login ghcr.io -u ${{github.actor}} --password-stdin && \
-        docker compose pull && \
         docker compose down && \
-        docker compose up -d --force-recreate --no-deps && \
+        docker compose build --no-cache && \
+        docker compose up -d && \
         echo '--- CONTAINER STATUS ---' && \
         docker compose ps && \
         echo '--- CONTAINER LOGS ---' && \
