@@ -4,9 +4,9 @@ const projects = [
     title: "This app",
     logo: "/images/ratchet.svg",
     logoStyle: "width: 60px;",
-    status: "is it running?",
+    status: "running",
     description:
-      "Testing monitoring dashboard app, sitting on mikr.us VPS",
+      "This should be displayed",
     links: [
       { url: "#", text: "https://github.com/dejwodejo/monitor" },
       { url: "#", text: "https://www.qsection.com" },
