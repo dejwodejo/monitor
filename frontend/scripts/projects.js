@@ -4,7 +4,7 @@ const projects = [
     title: "This app",
     logo: "/images/ratchet.svg",
     logoStyle: "width: 60px;",
-    status: "running",
+    status: "is it running?",
     description:
       "Testing monitoring dashboard app, sitting on mikr.us VPS",
     links: [
