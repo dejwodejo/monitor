@@ -1,7 +1,7 @@
 services:
   backend:
     container_name: fastapi_backend
-    build: ./backend
+    image: ghcr.io/dejwodejo/monitor_backend:latest
     restart: always
     ports:
       - "8000:8000"
@@ -11,7 +11,7 @@ services:
 
   frontend:
     container_name: nginx_front
-    build: ./frontend
+    image: ghcr.io/dejwodejo/monitor_frontend:latest
     restart: always
     ports:
       - "80:80"
