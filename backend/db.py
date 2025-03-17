@@ -20,8 +20,6 @@ class User(Base):
 
 Base.metadata.create_all(bind=engine)
 
-
-# Pydantic models
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -29,11 +27,6 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
-
-
-class UserLogin(BaseModel):
-    email: str
-    password: str
 
 
 def get_db():
