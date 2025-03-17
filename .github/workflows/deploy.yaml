@@ -34,8 +34,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Test simple SSH
-      run: ssh ${{secrets.VPS_USERNAME}}@${{secrets.VPS_HOST}} -p ${{secrets.VPS_PORT}} "echo 'Connection successful'"
     - name: install ssh keys
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
